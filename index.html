@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoMotion — Modern Car Showcase</title>
+  <meta name="description" content="Professional responsive car website with hero, services, contact form and footer." />
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#ff6b00; /* orange */
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1100px;
+      --shadow: 0 8px 24px rgba(2,6,23,0.6);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,var(--bg), #071022 60%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:24px 20px;
+      display:flex;
+      justify-content:center;
+      font-size:16px;
+    }
+    .wrap{width:100%;max-width:var(--max-width);}
+
+    /* NAVBAR */
+    header{
+      position:sticky;top:12px;z-index:40;backdrop-filter: blur(6px);
+      margin-bottom:18px;
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff9a4d);display:flex;align-items:center;justify-content:center;color:#071022;font-weight:800}
+    .brand h1{margin:0;font-size:18px}
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:#fff}
+
+    /* mobile menu */
+    .menu-btn{display:none;background:none;border:0;color:var(--muted);font-weight:700;padding:8px 10px;border-radius:8px}
+    .menu-btn:focus{outline:2px solid rgba(255,255,255,0.06)}
+
+    /* HERO */
+    .hero{
+      display:grid;grid-template-columns:1fr 480px;gap:28px;align-items:center;margin-top:8px;margin-bottom:36px;
+    }
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .eyebrow{color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+    .headline{font-size:34px;margin:12px 0;color:#fff;animation:slideUp .9s ease both}
+    @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .sub{color:var(--muted);margin-bottom:18px}
+    .cta{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#ff9a4d);color:#071022;font-weight:800;border:0;cursor:pointer;transition:transform .18s ease, box-shadow .18s}
+    .cta:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(255,107,0,0.18)}
+    .secondary{margin-left:12px;padding:10px 14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* car illustration */
+    .visual{display:flex;align-items:center;justify-content:center}
+    .car-illustration{width:100%;max-width:440px;filter:drop-shadow(0 18px 40px rgba(2,6,23,0.6));transform:translateY(0);animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+
+    /* SERVICES */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:34px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);transition:transform .22s ease, box-shadow .22s;}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+    .card .icon{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .card h3{margin:0 0 8px 0}
+    .card p{color:var(--muted);margin:0}
+
+    /* CONTACT */
+    .contact{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
+    form{display:flex;flex-direction:column;gap:12px}
+    label{font-size:14px;color:var(--muted)}
+    input,textarea,select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:#e6eef8}
+    input:focus,textarea:focus{outline:2px solid rgba(255,107,0,0.12);border-color:rgba(255,255,255,0.12)}
+    .row{display:flex;gap:12px}
+    .row .col{flex:1}
+    .submit{background:linear-gradient(90deg,var(--accent),#ff9a4d);border:0;padding:12px;border-radius:10px;color:#071022;font-weight:800;cursor:pointer}
+    .error{color:#ffb4a6;font-size:13px}
+
+    /* FOOTER */
+    footer{margin-top:28px;padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+    .socials{display:flex;gap:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.02);text-decoration:none;color:var(--muted)}
+    .links{display:flex;gap:14px;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .contact{grid-template-columns:1fr}
+      .services{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:680px){
+      .nav ul{display:none}
+      .menu-btn{display:inline-flex}
+      .hero{gap:14px}
+      .services{grid-template-columns:1fr}
+      body{padding:14px}
+    }
+
+    /* Mobile slide-in menu */
+    .mobile-menu{position:fixed;right:12px;top:68px;background:linear-gradient(180deg, rgba(2,6,23,0.98), rgba(2,6,23,0.96));border-radius:12px;padding:12px;box-shadow:var(--shadow);display:none;flex-direction:column;gap:10px;width:220px}
+    .mobile-menu a{color:var(--muted);text-decoration:none;padding:10px;border-radius:8px}
+    .mobile-menu a:hover{background:rgba(255,255,255,0.02);color:#fff}
+
+    /* small utility */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="nav" role="navigation" aria-label="Main Navigation">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">AM</div>
+          <div>
+            <h1>AutoMotion</h1>
+            <div class="small muted">Drive the future</div>
+          </div>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </nav>
+
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="secondary small" onclick="location.href='#contact'">Get Quote</button>
+          <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu ▾</button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="mobile-menu" role="menu" aria-hidden="true">
+        <a href="#hero">Home</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Featured — New Collection</div>
+        <h2 class="headline">Performance meets elegance — drive the extraordinary</h2>
+        <p class="sub">Explore our hand-picked lineup of cars, tailored services and bespoke upgrades. Designed for drivers who demand style, tech and performance.</p>
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="cta" onclick="location.href='#services'">Explore Cars</button>
+          <button class="secondary">Schedule Test Drive</button>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted);font-size:14px">Trusted by drivers — <strong style="color:#fff">10,000+</strong> satisfied customers</div>
+      </div>
+
+      <div class="visual">
+        <!-- Simple SVG car illustration (stylized) -->
+        <svg class="car-illustration" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylized car illustration">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff6b00"/>
+      <stop offset="1" stop-color="#ff9a4d"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="900" height="520" rx="24" fill="transparent"/>
+  <g transform="translate(40,120)">
+    <path d="M60 210 L820 210 L840 230 L40 230 Z" fill="#071022" opacity="0.6"/>
+    <path d="M80 190 C120 120, 240 80, 420 80 C600 80,720 130,780 190 L80 190 Z" fill="#0b1420" stroke="rgba(255,255,255,0.02)"/>
+    <path d="M120 190 C210 120, 500 90, 700 190" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" opacity="0.95"/>
+    <!-- windows -->
+    <path d="M200 140 C300 120, 450 120, 600 140 L610 160 L190 160 Z" fill="rgba(255,255,255,0.03)"/>
+    <!-- wheels -->
+    <g transform="translate(200,210)">
+      <circle r="46" fill="#08121a" />
+      <circle r="30" fill="#0f1724"/>
+    </g>
+    <g transform="translate(620,210)">
+      <circle r="46" fill="#08121a" />
+      <circle r="30" fill="#0f1724"/>
+    </g>
+    <!-- accent streak -->
+    <path d="M140 160 C300 120, 520 120, 700 160" stroke="rgba(255,255,255,0.04)" stroke-width="14" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <h3 style="margin-bottom:12px">Our Services</h3>
+      <div class="services">
+        <article class="card" aria-labelledby="s1">
+          <div class="icon" aria-hidden="true">🚗</div>
+          <h3 id="s1">Premium Sales</h3>
+          <p>Curated selection of new and certified pre-owned cars with extended warranty options.</p>
+        </article>
+
+        <article class="card" aria-labelledby="s2">
+          <div class="icon" aria-hidden="true">🛠️</div>
+          <h3 id="s2">Expert Servicing</h3>
+          <p>Factory-grade maintenance, diagnostics and genuine parts fitted by certified technicians.</p>
+        </article>
+
+        <article class="card" aria-labelledby="s3">
+          <div class="icon" aria-hidden="true">⚙️</div>
+          <h3 id="s3">Custom Upgrades</h3>
+          <p>Performance tuning, visual packages and interior customization — built to your taste.</p>
+        </article>
+
+        <article class="card" aria-labelledby="s4">
+          <div class="icon" aria-hidden="true">📦</div>
+          <h3 id="s4">Easy Financing</h3>
+          <p>Flexible EMI plans, trade-in valuations and fast loan approvals with trusted partners.</p>
+        </article>
+
+        <article class="card" aria-labelledby="s5">
+          <div class="icon" aria-hidden="true">🚚</div>
+          <h3 id="s5">Doorstep Delivery</h3>
+          <p>Safe and insured delivery across cities, with white-glove handover and inspection.</p>
+        </article>
+
+        <article class="card" aria-labelledby="s6">
+          <div class="icon" aria-hidden="true">🔒</div>
+          <h3 id="s6">Warranty & Support</h3>
+          <p>Comprehensive warranty packages and 24/7 roadside assistance options.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact" style="margin-top:28px">
+      <div>
+        <h3>Get in touch</h3>
+        <p class="muted">Have questions? Fill the form and we'll get back within 24 hours.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="row">
+            <div class="col">
+              <label for="name">Full name</label>
+              <input id="name" name="name" required placeholder="Your full name" />
+              <div class="error" id="errName" aria-live="polite"></div>
+            </div>
+            <div class="col">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" required placeholder="+91 98765 43210" />
+              <div class="error" id="errPhone" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="hello@you.com" />
+          <div class="error" id="errEmail" aria-live="polite"></div>
+
+          <label for="service">Interested in</label>
+          <select id="service" name="service">
+            <option>Premium Sales</option>
+            <option>Servicing</option>
+            <option>Upgrades</option>
+            <option>Financing</option>
+          </select>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us a little about what you need..."></textarea>
+
+          <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+            <button class="submit" type="submit">Send Message</button>
+            <div class="muted small">Or call us: <strong style="color:#fff">+91 98765 43210</strong></div>
+          </div>
+        </form>
+      </div>
+
+      <aside style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:18px;border-radius:12px">
+        <h4 style="margin-top:0">Visit our showroom</h4>
+        <p class="muted">123 AutoLane Avenue, Tech City — Open Mon–Sat 9:00–18:00</p>
+        <div style="margin-top:12px">
+          <strong>Support</strong>
+          <p class="muted small">support@automotion.example</p>
+        </div>
+
+        <div style="margin-top:18px">
+          <h4 style="margin:0 0 8px 0">Why choose AutoMotion?</h4>
+          <ul class="muted small">
+            <li>Transparent pricing</li>
+            <li>Certified technicians</li>
+            <li>Nationwide service network</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div style="display:flex;flex-direction:column">
+        <div style="font-weight:700">AutoMotion</div>
+        <div class="muted small">© <span id="year"></span> AutoMotion. All rights reserved.</div>
+      </div>
+
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="socials" aria-label="Social links">
+        <a href="#" title="Twitter" aria-label="Twitter">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 5.75c-.6.27-1.24.45-1.92.53a3.36 3.36 0 0 0-5.72 2.07c0 .25.02.5.07.74A9.54 9.54 0 0 1 3.28 4.77a3.38 3.38 0 0 0-.46 1.7c0 1.17.6 2.2 1.53 2.8a3.32 3.32 0 0 1-1.52-.42v.04c0 1.64 1.17 3.01 2.73 3.33-.28.07-.58.1-.89.1-.22 0-.43-.02-.64-.06.43 1.33 1.67 2.3 3.14 2.33A6.73 6.73 0 0 1 2 18.27 9.5 9.5 0 0 0 7.29 20c6.6 0 10.2-5.75 10.2-10.74v-.49A7.24 7.24 0 0 0 22 5.75z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2A4.8 4.8 0 1 0 16.8 13 4.8 4.8 0 0 0 12 8.2zM18.6 6.3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.49 17.52 2 11.94 2S2 6.49 2 12.07c0 4.86 3.45 8.89 8 9.78v-6.92H7.53v-2.86H10V9.5c0-2.48 1.47-3.86 3.72-3.86 1.08 0 2.21.2 2.21.2v2.43h-1.24c-1.22 0-1.6.76-1.6 1.54v1.86h2.74l-.44 2.86h-2.3v6.92c4.55-.89 8-4.92 8-9.78z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Fill current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', ()=>{
+      const open = mobileMenu.style.display === 'flex';
+      mobileMenu.style.display = open ? 'none' : 'flex';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+      mobileMenu.setAttribute('aria-hidden', String(open));
+    });
+
+    // Basic form validation
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      // clear errors
+      const errName = document.getElementById('errName');
+      const errPhone = document.getElementById('errPhone');
+      const errEmail = document.getElementById('errEmail');
+      errName.textContent = errPhone.textContent = errEmail.textContent = '';
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      let ok = true;
+
+      if(name.length < 3){errName.textContent = 'Please enter your full name.'; ok=false}
+      const phoneRe = /^[+\d][0-9\s\-]{7,20}$/;
+      if(!phoneRe.test(phone)){errPhone.textContent = 'Enter a valid phone number.'; ok=false}
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRe.test(email)){errEmail.textContent = 'Enter a valid email address.'; ok=false}
+
+      if(!ok) return;
+      // Simulate success (in production you'd POST to a server)
+      alert('Thanks — your message has been received. We will contact you soon.');
+      form.reset();
+    });
+
+    // Simple scroll effect: change nav shadow on scroll
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 24) nav.style.boxShadow = '0 14px 40px rgba(2,6,23,0.7)';
+      else nav.style.boxShadow = 'var(--shadow)';
+    });
+  </script>
+</body>
+</html>
